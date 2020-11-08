@@ -45,6 +45,8 @@ async function run(): Promise<void> {
     const sender: string = senderType === 'Bot' ? login.replace('[bot]', '') : login;
 
     const linkTicket = (matchArray: RegExpMatchArray): void => {
+      debug('match array for linkTicket', JSON.stringify(matchArray));
+
       if (!ticketLink) {
         return;
       }
