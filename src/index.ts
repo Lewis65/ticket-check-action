@@ -34,7 +34,7 @@ async function run(): Promise<void> {
     });
     const ticketLink = getInput('ticketLink', { required: false });
     const titleRegex = new RegExp(titleRegexBase, titleRegexFlags);
-    const titleCheck = title.match(titleRegex);
+    const titleCheck = titleRegex.exec(title);
 
     // Instantiate a GitHub Client instance
     const token = getInput('token', { required: true });
@@ -116,7 +116,7 @@ async function run(): Promise<void> {
       required: true
     });
     const branchRegex = new RegExp(branchRegexBase, branchRegexFlags);
-    const branchCheck = branch.match(branchRegex);
+    const branchCheck = branchRegex.exec(branch);
 
     if (branchCheck !== null) {
       debug('success', 'Branch name contains a reference to a ticket, updating title');
@@ -170,7 +170,8 @@ async function run(): Promise<void> {
     // Check for a ticket reference number in the body
     const bodyRegexBase = getInput('bodyRegex', { required: true });
     const bodyRegexFlags = getInput('bodyRegexFlags', { required: true });
-    const bodyCheck = body.match(new RegExp(bodyRegexBase, bodyRegexFlags));
+    const bodyRegex = new RegExp(bodyRegexBase, bodyRegexFlags);
+    const bodyCheck = bodyRegex.exec(body);
 
     if (bodyCheck !== null) {
       debug('success', 'Body contains a reference to a ticket, updating title');
@@ -215,7 +216,7 @@ async function run(): Promise<void> {
       required: true
     });
     const bodyURLRegex = new RegExp(bodyURLRegexBase, bodyURLRegexFlags);
-    const bodyURLCheck = body.match(bodyURLRegex);
+    const bodyURLCheck = bodyURLRegex.exec(body);
 
     if (bodyURLCheck !== null) {
       debug('success', 'Body contains a ticket URL, updating title');
