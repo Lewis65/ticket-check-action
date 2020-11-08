@@ -46,6 +46,7 @@ async function run(): Promise<void> {
 
     const linkTicket = (matchArray: RegExpMatchArray): void => {
       debug('match array for linkTicket', JSON.stringify(matchArray));
+      debug('groups for linkTicket', JSON.stringify(matchArray.groups));
 
       if (!ticketLink) {
         return;
