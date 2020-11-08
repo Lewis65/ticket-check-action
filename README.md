@@ -12,6 +12,8 @@ It can detect the ID in the title of the pull request, in the branch name, wheth
 
 If no ticket/issue ID is in the title, it will extract the ID from the branch or body and update the title for you. It will fail the check if no ticket ID is found anywhere.
 
+If a `ticketLink` input is provided and named groups `(?<ticketNumber>)` are used in regexes, a ticket link will be posted on a PR upon a successful match. This overrides the `quiet` option.
+
 ## Usage
 
 In your `.github/workflows` folder, create a new `pull_request_linting.yml` file with the respective contents based on your needs.
@@ -46,10 +48,10 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           ticketLink: 'https://github.com/:owner/:repo/issues/%ticketNumber%'
           ticketPrefix: '#'
-          titleRegex: '^#(\d+)'
-          branchRegex: '^(\d+)'
-          bodyRegex: '#(\d+)'
-          bodyURLRegex: 'http(s?):\/\/(github.com)(\/:owner)(\/:repo)(\/issues)\/\d+'
+          titleRegex: '^#(?<ticketNumber>\d+)'
+          branchRegex: '^(?<ticketNumber>\d+)'
+          bodyRegex: '#(?<ticketNumber>\d+)'
+          bodyURLRegex: 'http(s?):\/\/(github.com)(\/:owner)(\/:repo)(\/issues)\/(?<ticketNumber>\d+)'
 ```
 
 ### Jira
@@ -73,10 +75,10 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           ticketLink: 'https://:org.atlassian.net/browse/PROJ-%ticketNumber%'
           ticketPrefix: 'PROJ-'
-          titleRegex: '^PROJ-(\d+)'
-          branchRegex: '^PROJ-(\d+)'
-          bodyRegex: 'PROJ-(\d+)'
-          bodyURLRegex: 'http(s?):\/\/(:org.atlassian.net)(\/browse)\/(PROJ\-)\d+'
+          titleRegex: '^PROJ-(?<ticketNumber>\d+)'
+          branchRegex: '^PROJ-(?<ticketNumber>\d+)'
+          bodyRegex: 'PROJ-(?<ticketNumber>\d+)'
+          bodyURLRegex: 'http(s?):\/\/(:org.atlassian.net)(\/browse)\/(PROJ\-)(?<ticketNumber>\d+)'
 ```
 
 ### Clubhouse
@@ -100,10 +102,10 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           ticketLink: 'https://app.clubhouse.io/:org/story/%ticketNumber%'
           ticketPrefix: 'CH-'
-          titleRegex: '^(CH)(-?)(\d{3,})'
-          branchRegex: '^(CH)(-?)(\d{3,})'
-          bodyRegex: '(CH)(-?)(\d{3,})'
-          bodyURLRegex: 'http(s?):\/\/(app.clubhouse.io)(\/:org)(\/story)\/\d+'
+          titleRegex: '^(CH)(-?)(?<ticketNumber>\d{3,})'
+          branchRegex: '^(CH)(-?)(?<ticketNumber>\d{3,})'
+          bodyRegex: '(CH)(-?)(?<ticketNumber>\d{3,})'
+          bodyURLRegex: 'http(s?):\/\/(app.clubhouse.io)(\/:org)(\/story)\/(?<ticketNumber>\d+)'
 ```
 
 </details>

@@ -45,8 +45,7 @@ inputs:
 
   bodyURLRegex:
     description: 'The regular expression used to search the body for a URL reference'
-    default: 'http(s?):\/\/(app.clubhouse.io)(\/neofinancial)(\/story)\/\d+'
-    required: true
+    required: false
 
   bodyURLRegexFlags:
     description: 'The flags applied to the body regular expression when searching for a URL reference'
@@ -69,7 +68,6 @@ inputs:
 
   ticketLink:
     description: 'Ticket URL with `%ticketNumber%` placeholder'
-    default: 'https://app.clubhouse.io/neofinancial/story/%ticketNumber%'
     required: false
 
 runs:
