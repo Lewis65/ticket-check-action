@@ -87,7 +87,7 @@ async function run(): Promise<void> {
         owner,
         repo,
         pull_number: number,
-        body: `See the ticket for this pull request: ${linkToTicket})`,
+        body: `See the ticket for this pull request: ${linkToTicket}`,
         event: 'COMMENT'
       });
     };
