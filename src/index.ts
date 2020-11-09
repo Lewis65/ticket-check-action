@@ -74,6 +74,8 @@ async function run(): Promise<void> {
         pull_number: number
       });
 
+      debug('current reviews', JSON.stringify(currentReviews));
+
       if (
         currentReviews?.length &&
         currentReviews.some((review: { body?: string }) => review?.body?.includes(linkToTicket))
