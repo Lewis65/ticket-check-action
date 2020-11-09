@@ -77,8 +77,8 @@ async function run(): Promise<void> {
       debug('current reviews', JSON.stringify(currentReviews));
 
       if (
-        currentReviews?.length &&
-        currentReviews.some((review: { body?: string }) => review?.body?.includes(linkToTicket))
+        currentReviews?.data?.length &&
+        currentReviews?.data.some((review: { body?: string }) => review?.body?.includes(linkToTicket))
       ) {
         debug('already posted ticketLink', 'found an existing review that contains the ticket link');
 
